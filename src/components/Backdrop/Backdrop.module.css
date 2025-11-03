@@ -1,0 +1,96 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
+}
+
+.frontLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 100%
+  );
+  color: var(--white);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-xl);
+  transition: transform var(--transition-slow);
+  z-index: 2;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.backdrop.open .frontLayer {
+  transform: translateY(calc(100vh - 80px));
+}
+
+.frontContent {
+  flex: 1;
+}
+
+.revealButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  margin-top: var(--spacing-lg);
+}
+
+.revealButton:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.icon {
+  transition: transform var(--transition-base);
+}
+
+.backdrop.open .icon {
+  transform: rotate(180deg);
+}
+
+.backLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-50);
+  overflow-y: auto;
+  z-index: 1;
+  padding: var(--spacing-2xl);
+  padding-top: 200px;
+}
+
+.backContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .frontLayer,
+  .backLayer {
+    padding: var(--spacing-lg);
+  }
+
+  .backLayer {
+    padding-top: 180px;
+  }
+}

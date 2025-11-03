@@ -7,12 +7,12 @@
 
 :root {
   /* Colores principales */
-  --primary-color: #6366f1;
-  --primary-dark: #4f46e5;
+  --primary-color: #08509a;
+  --primary-dark: darkblue;
   --primary-light: #818cf8;
 
-  --secondary-color: #10b981;
-  --error-color: #ef4444;
+  --secondary-color: darkgreen;
+  --error-color: darkred;
   --warning-color: #f59e0b;
 
   /* Grises */
