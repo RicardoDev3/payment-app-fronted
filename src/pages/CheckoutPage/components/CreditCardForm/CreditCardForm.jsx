@@ -4,22 +4,22 @@ import PropTypes from "prop-types";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import LockIcon from "@mui/icons-material/Lock";
 import {
+  cleanCardNumber,
+  detectCardType,
+  formatCardNumber,
   validateCardNumber,
   validateCVV,
   validateExpirationDate,
-  formatCardNumber,
-  cleanCardNumber,
-  detectCardType,
-} from "../../../utils/cardValidator";
+} from "../../../../utils/cardValidator";
 import styles from "./CreditCardForm.module.css";
 
 const CreditCardForm = ({ onSubmit, initialData = {} }) => {
   const [formData, setFormData] = useState({
     number: initialData.number || "",
     cvc: initialData.cvc || "",
-    expMonth: initialData.expMonth || "",
-    expYear: initialData.expYear || "",
-    cardHolder: initialData.cardHolder || "",
+    exp_month: initialData.exp_month || "",
+    exp_year: initialData.exp_year || "",
+    card_holder: initialData.card_holder || "",
   });
 
   const [errors, setErrors] = useState({});
@@ -68,10 +68,10 @@ const CreditCardForm = ({ onSubmit, initialData = {} }) => {
   const handleMonthChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
     if (value.length <= 2) {
-      setFormData({ ...formData, expMonth: value });
+      setFormData({ ...formData, exp_month: value });
 
-      if (value.length === 2 && formData.expYear.length === 2) {
-        const validation = validateExpirationDate(value, formData.expYear);
+      if (value.length === 2 && formData.exp_year.length === 2) {
+        const validation = validateExpirationDate(value, formData.exp_year);
         if (!validation.isValid) {
           setErrors({ ...errors, expiration: "Fecha de expiración inválida" });
         } else {
@@ -86,10 +86,10 @@ const CreditCardForm = ({ onSubmit, initialData = {} }) => {
   const handleYearChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
     if (value.length <= 2) {
-      setFormData({ ...formData, expYear: value });
+      setFormData({ ...formData, exp_year: value });
 
-      if (value.length === 2 && formData.expMonth.length === 2) {
-        const validation = validateExpirationDate(formData.expMonth, value);
+      if (value.length === 2 && formData.exp_month.length === 2) {
+        const validation = validateExpirationDate(formData.exp_month, value);
         if (!validation.isValid) {
           setErrors({ ...errors, expiration: "Fecha de expiración inválida" });
         } else {
@@ -118,15 +118,15 @@ const CreditCardForm = ({ onSubmit, initialData = {} }) => {
     }
 
     const expirationValidation = validateExpirationDate(
-      formData.expMonth,
-      formData.expYear
+      formData.exp_month,
+      formData.exp_year
     );
     if (!expirationValidation.isValid) {
       newErrors.expiration = "Fecha de expiración inválida";
     }
 
-    if (!formData.cardHolder.trim()) {
-      newErrors.cardHolder = "Nombre del titular es requerido";
+    if (!formData.card_holder.trim()) {
+      newErrors.card_holder = "Nombre del titular es requerido";
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -179,7 +179,7 @@ const CreditCardForm = ({ onSubmit, initialData = {} }) => {
               errors.expiration ? styles.inputError : ""
             }`}
             placeholder="MM"
-            value={formData.expMonth}
+            value={formData.exp_month}
             onChange={handleMonthChange}
             maxLength="2"
           />
@@ -193,7 +193,7 @@ const CreditCardForm = ({ onSubmit, initialData = {} }) => {
               errors.expiration ? styles.inputError : ""
             }`}
             placeholder="AA"
-            value={formData.expYear}
+            value={formData.exp_year}
             onChange={handleYearChange}
             maxLength="2"
           />
@@ -224,19 +224,19 @@ const CreditCardForm = ({ onSubmit, initialData = {} }) => {
         <input
           type="text"
           className={`${styles.input} ${
-            errors.cardHolder ? styles.inputError : ""
+            errors.card_holder ? styles.inputError : ""
           }`}
           placeholder="COMO APARECE EN LA TARJETA"
-          value={formData.cardHolder}
+          value={formData.card_holder}
           onChange={(e) =>
             setFormData({
               ...formData,
-              cardHolder: e.target.value.toUpperCase(),
+              card_holder: e.target.value.toUpperCase(),
             })
           }
         />
-        {errors.cardHolder && (
-          <span className={styles.error}>{errors.cardHolder}</span>
+        {errors.card_holder && (
+          <span className={styles.error}>{errors.card_holder}</span>
         )}
       </div>
 

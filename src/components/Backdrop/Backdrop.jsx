@@ -1,32 +1,22 @@
 import PropTypes from "prop-types";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import styles from "./Backdrop.module.css";
 
-const Backdrop = ({ isOpen, onClose, frontContent, backContent }) => {
-  return (
-    <div className={`${styles.backdrop} ${isOpen ? styles.open : ""}`}>
-      {/* Front Layer */}
-      <div className={styles.frontLayer}>
-        <div className={styles.frontContent}>{frontContent}</div>
-        <button className={styles.revealButton} onClick={onClose}>
-          <KeyboardArrowDownIcon className={styles.icon} />
-          <span>Ver resumen</span>
-        </button>
-      </div>
+const Backdrop = ({ isVisible, message = "Cargando..." }) => {
+  if (!isVisible) return null;
 
-      {/* Back Layer */}
-      <div className={styles.backLayer}>
-        <div className={styles.backContent}>{backContent}</div>
+  return (
+    <div className={styles.backdrop}>
+      <div className={styles.content}>
+        <div className={styles.spinner}></div>
+        <p className={styles.message}>{message}</p>
       </div>
     </div>
   );
 };
 
 Backdrop.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  frontContent: PropTypes.node.isRequired,
-  backContent: PropTypes.node.isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  message: PropTypes.string,
 };
 
 export default Backdrop;

@@ -18,7 +18,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route path="/" element={<ProductsPage />} />
-        <Route path="/checkout/:productId" element={<CheckoutPage />} />
+        <Route path="/checkout/" element={<CheckoutPage />} />
         <Route path="/result/:transactionId" element={<ResultPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

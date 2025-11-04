@@ -1,0 +1,106 @@
+.progressContainer {
+  width: 100%;
+  padding: 24px 0;
+}
+
+.stepsWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stepGroup {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e7eb;
+  color: #6b7280;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.stepCircle.active {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+.stepCircle.completed {
+  background-color: darkgreen;
+  color: white;
+}
+
+.stepNumber {
+  font-size: 18px;
+}
+
+.checkIcon {
+  font-size: 28px;
+}
+
+.stepLabel {
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+  max-width: 100px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.stepLabel.activeLabel {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.stepLine {
+  flex: 1;
+  height: 2px;
+  background-color: #e5e7eb;
+  margin: 0 8px;
+  transition: background-color 0.3s ease;
+}
+
+.stepLine.completedLine {
+  background-color: #10b981;
+}
+
+@media (max-width: 768px) {
+  .stepsWrapper {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stepGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .stepLine {
+    width: 2px;
+    height: 24px;
+    margin: 0;
+  }
+
+  .stepLabel {
+    max-width: 200px;
+  }
+}

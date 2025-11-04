@@ -21,14 +21,13 @@ const ProductsPage = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-    // Limpiar transacción anterior si existe
     dispatch(clearTransaction());
   }, [dispatch]);
 
   const handleBuyClick = (product) => {
     dispatch(setSelectedProduct(product));
     showInfoToast(`Comprando: ${product.name}`);
-    navigate(`/checkout/${product.id}`);
+    navigate('/checkout');
   };
 
   const handleRefresh = () => {
